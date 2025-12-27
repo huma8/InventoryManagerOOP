@@ -204,7 +204,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Project Link: [https://github.com/huma8/InventoryManagerOOP](https://github.com/huma8/InventoryManagerOOP)
+[Mail](egocak8@gmail.com)
 
 ---
 
