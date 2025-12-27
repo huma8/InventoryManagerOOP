@@ -1,0 +1,1 @@
+"""Package for product classes in the inventory management system."""
