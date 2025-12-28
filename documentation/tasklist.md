@@ -19,8 +19,8 @@
 - [x] Create `remove_product()` method to remove products by ID
 - [x] Create `get_product()` method to retrieve products by ID
 - [x] Create `list_products()` method to return all products
-- [ ] Add validation to prevent duplicate product IDs
-- [ ] Implement basic inventory management methods
+- [x] Add validation to prevent duplicate product IDs
+- [x] Implement basic inventory management methods
 
 ## 3. Create base Supplier class in source/classes/Supplier.py with supplier information and product association
 - [ ] Create Supplier class with private attributes: `_name`, `_contact_info`, `_supplied_products`
