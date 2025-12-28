@@ -2,7 +2,7 @@
 
 ## 1. Create base Product class in source/classes/Product.py with encapsulation, private attributes, and property getters/setters
 - [x] Create the Product class with private attributes: `_id`, `_name`, `_price`, `_quantity`, `_created_at`
-- [ ] Implement constructor that initializes private attributes with validation
+- [x] Implement constructor that initializes private attributes with validation
 - [x] Add class attribute `_id_counter` to track product IDs
 - [x] Create property getters for all attributes (id, name, price, quantity, created_at)
 - [x] Create property setters for name, price, and quantity with validation
@@ -13,12 +13,12 @@
 - [x] Add `__repr__()` method for string representation
 
 ## 2. Create base Inventory class in source/classes/Inventory.py with product storage and management methods
-- [ ] Create Inventory class with private attribute `_products` as a dictionary
-- [ ] Implement constructor to initialize empty product dictionary
-- [ ] Create `add_product()` method to add products to inventory
-- [ ] Create `remove_product()` method to remove products by ID
-- [ ] Create `get_product()` method to retrieve products by ID
-- [ ] Create `list_products()` method to return all products
+- [x] Create Inventory class with private attribute `_products` as a dictionary
+- [x] Implement constructor to initialize empty product dictionary
+- [x] Create `add_product()` method to add products to inventory
+- [x] Create `remove_product()` method to remove products by ID
+- [x] Create `get_product()` method to retrieve products by ID
+- [x] Create `list_products()` method to return all products
 - [ ] Add validation to prevent duplicate product IDs
 - [ ] Implement basic inventory management methods
 
