@@ -23,12 +23,12 @@
 - [x] Implement basic inventory management methods
 
 ## 3. Create base Supplier class in source/classes/Supplier.py with supplier information and product association
-- [ ] Create Supplier class with private attributes: `_name`, `_contact_info`, `_supplied_products`
-- [ ] Implement constructor to initialize supplier information
-- [ ] Create property getters and setters for name and contact_info
-- [ ] Implement `add_product()` method to associate products with supplier
-- [ ] Implement `remove_product()` method to disassociate products
-- [ ] Create `get_supplied_products()` method to return associated products
+- [x] Create Supplier class with private attributes: `_name`, `_contact_info`, `_supplied_products`
+- [x] Implement constructor to initialize supplier information
+- [x] Create property getters and setters for name and contact_info
+- [x] Implement `add_product()` method to associate products with supplier
+- [x] Implement `remove_product()` method to disassociate products
+- [x] Create `get_supplied_products()` method to return associated products
 - [ ] Add validation to prevent duplicate product associations
 
 ## 4. Create base Order class in source/classes/Order.py with order processing functionality

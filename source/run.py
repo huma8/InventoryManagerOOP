@@ -1,5 +1,6 @@
 from classes.Product import Product
 from classes.Inventory import Inventory
+from classes.Supplier import Supplier
 
 
 """
@@ -32,4 +33,11 @@ print(i.generate_inventory_report())
 inventory = Inventory.create_sample_inventory()
 p = Product("samsunG", 5.0, 1)
 inventory.add_product(p)
+inventory.add_product(p)
 print(inventory.generate_inventory_report())
+
+s = Supplier("HighLevel","highlevel@everest.com")
+t = Product("Gore", 8, 1)
+s.add_product(p,t)
+s.remove_product(p)
+print(s.get_supplied_products())
