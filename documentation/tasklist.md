@@ -32,15 +32,15 @@
 - [ ] Add validation to prevent duplicate product associations
 
 ## 4. Create base Order class in source/classes/Order.py with order processing functionality
-- [ ] Create Order class with private attributes: `_order_id`, `_order_type`, `_items`, `_date`, `_total_amount`
-- [ ] Implement constructor with order type parameter ("Purchase" or "Sale")
-- [ ] Create class attribute `_order_id_counter` to track order IDs
+- [x] Create Order class with private attributes: `_order_id`, `_order_type`, `_items`, `_date`, `_total_amount`
+- [x] Implement constructor with order type parameter ("Purchase" or "Sale")
+- [x] Create class attribute `_order_id_counter` to track order IDs
 - [ ] Create property getters for order attributes
-- [ ] Implement `add_item()` method to add products to order with validation
-- [ ] Implement `remove_item()` method to remove products from order
-- [ ] Create `_calculate_total()` private method to update order total
+- [x] Implement `add_item()` method to add products to order with validation
+- [x] Implement `remove_item()` method to remove products from order
+- [x] Create `_calculate_total()` private method to update order total
 - [ ] Implement `execute_order()` method to process the order and update inventory
-- [ ] Add validation to ensure sufficient stock for sales orders
+- [x] Add validation to ensure sufficient stock for sales orders
 
 ## 5. Implement Electronics class in source/products/Electronics.py inheriting from Product with warranty attribute
 - [ ] Import Product class from classes.Product
