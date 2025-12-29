@@ -47,7 +47,14 @@ print(s.get_supplied_products())
 
 #-----------------------------------------------------------------
 
-"""
 o = Order()
 o.order_type = "Sale"
-print(o.order_type)
+p = Product("Gore", 2.5, 4)
+o.add_item(p, 4)
+print(p)
+print(o.order_amount)
+o.execute_order()
+print(p)
+print(o.order_amount)
+
+"""

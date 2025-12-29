@@ -6,7 +6,7 @@ class Order:
     def __init__(self, order_type:str="Purchase"):
         self._order_id = Order._order_id_counter
         self._order_type = order_type #purchase or sale
-        self._items = [(Product,int)]
+        self._items = []
         self._date = datetime.datetime.now()
         self._total_amount = 0
         Order._order_id_counter += 1
