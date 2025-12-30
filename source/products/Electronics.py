@@ -16,13 +16,13 @@ class Electronics(Product):
             raise ValueError("Warranty Months Value must be above zero")
         self._warranty_months = value
 
+    @property
+    def info(self):
+        return f"Name: {self.name} \nAdditional Info: {self._info}"
+
     def get_product_type(args):
         return "Electronics"
     
     def __repr__(self):
         return f"{super().__repr__()}, Warranty: {self._warranty_months} months"
-
-    @property
-    def info(self):
-        return f"Name: {self.name} \nAdditional Info: {self._info}"
 

@@ -52,14 +52,14 @@
 - [x] Add any electronics-specific methods if needed
 
 ## 6. Implement Clothing class in source/products/Clothing.py inheriting from Product with size and material attributes
-- [ ] Import Product class from classes.Product
-- [ ] Create Clothing class inheriting from Product
-- [ ] Implement constructor that calls super().__init__() and adds `_size` and `_material` attributes
-- [ ] Create property getters and setters for size and material with validation
-- [ ] For size, validate against standard sizes: ["XS", "S", "M", "L", "XL", "XXL"]
-- [ ] Override `get_product_type()` method to return "Clothing"
-- [ ] Override `__repr__()` method to include size and material information
-- [ ] Add any clothing-specific methods if needed
+- [x] Import Product class from classes.Product
+- [x] Create Clothing class inheriting from Product
+- [x] Implement constructor that calls super().__init__() and adds `_size` and `_material` attributes
+- [x] Create property getters and setters for size and material with validation
+- [x] For size, validate against standard sizes: ["XS", "S", "M", "L", "XL", "XXL"]
+- [x] Override `get_product_type()` method to return "Clothing"
+- [x] Override `__repr__()` method to include size and material information
+- [x] Add any clothing-specific methods if needed
 
 ## 7. Implement Food class in source/products/Food.py inheriting from Product with expiry date functionality
 - [ ] Import Product class from classes.Product and datetime module

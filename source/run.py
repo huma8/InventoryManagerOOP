@@ -3,6 +3,8 @@ from classes.Inventory import Inventory
 from classes.Supplier import Supplier
 from classes.Order import Order
 from products.Electronics import Electronics
+from products.Clothing import Clothing
+from products.Food import Food
 
 """
 p = Product("ayfon", 15, 1)
@@ -60,7 +62,13 @@ print(o.order_amount)
 
 #-----------------------------------------------------------------
 
-"""
-
 e = Electronics("ELGI", 15.24, 5, warranty_months=5, additional_info="Ayım andı dı watı pliz help mi")
 print(e.info)
+
+c = Clothing("Poncuk", 10.75, 4, "XL", "Cotton", additional_info="Please send cargo to this address ...")
+print(c.info)
+
+
+"""
+
+
