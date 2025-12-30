@@ -71,7 +71,8 @@ class Product():
         return self._quantity * self._price
     
     def get_product_type(args):
-        pass
+        """Get Product Type By Children"""
+        raise NotImplementedError("Make sure children of product class has get_product_type function")
 
     def __repr__(self):
         return f"{self.__class__.__name__}(Product id: {self._id}, Name: {self._name}, Price: {self._price}, Quantity: {self._quantity}, Created at {self._created_at})"

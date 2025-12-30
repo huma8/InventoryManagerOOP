@@ -2,6 +2,7 @@ from classes.Product import Product
 from classes.Inventory import Inventory
 from classes.Supplier import Supplier
 from classes.Order import Order
+from products.Electronics import Electronics
 
 """
 p = Product("ayfon", 15, 1)
@@ -57,4 +58,9 @@ o.execute_order()
 print(p)
 print(o.order_amount)
 
+#-----------------------------------------------------------------
+
 """
+
+e = Electronics("ELGI", 15.24, 5, warranty_months=5, additional_info="Ayım andı dı watı pliz help mi")
+print(e.info)

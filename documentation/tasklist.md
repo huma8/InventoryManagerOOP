@@ -43,13 +43,13 @@
 - [x] Add validation to ensure sufficient stock for sales orders
 
 ## 5. Implement Electronics class in source/products/Electronics.py inheriting from Product with warranty attribute
-- [ ] Import Product class from classes.Product
-- [ ] Create Electronics class inheriting from Product
-- [ ] Implement constructor that calls super().__init__() and adds `_warranty_months` attribute
-- [ ] Create property getter and setter for warranty_months with validation (non-negative)
-- [ ] Override `get_product_type()` method to return "Electronics"
-- [ ] Override `__repr__()` method to include warranty information
-- [ ] Add any electronics-specific methods if needed
+- [x] Import Product class from classes.Product
+- [x] Create Electronics class inheriting from Product
+- [x] Implement constructor that calls super().__init__() and adds `_warranty_months` attribute
+- [x] Create property getter and setter for warranty_months with validation (non-negative)
+- [x] Override `get_product_type()` method to return "Electronics"
+- [x] Override `__repr__()` method to include warranty information
+- [x] Add any electronics-specific methods if needed
 
 ## 6. Implement Clothing class in source/products/Clothing.py inheriting from Product with size and material attributes
 - [ ] Import Product class from classes.Product
