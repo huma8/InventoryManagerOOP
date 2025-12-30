@@ -3,7 +3,7 @@ from classes.Product import Product
 class Clothing(Product):
     materials = ["cotton", "silk", "leather", "linen", "wool", "hemp"]
     clothing_sizes = ["XS", "S", "M", "L", "XL", "XXL"]
-    def __init__(self, name, price, quantity, size, material, additional_info):
+    def __init__(self, name:str, price:float, quantity:int, size:str, material:str, additional_info:str=""):
         super().__init__(name, price, quantity,)
         self._size = size
         self._material = material

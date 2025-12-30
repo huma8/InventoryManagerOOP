@@ -49,7 +49,7 @@
 - [x] Create property getter and setter for warranty_months with validation (non-negative)
 - [x] Override `get_product_type()` method to return "Electronics"
 - [x] Override `__repr__()` method to include warranty information
-- [x] Add any electronics-specific methods if needed
+- [] Add any electronics-specific methods if needed
 
 ## 6. Implement Clothing class in source/products/Clothing.py inheriting from Product with size and material attributes
 - [x] Import Product class from classes.Product
@@ -59,16 +59,16 @@
 - [x] For size, validate against standard sizes: ["XS", "S", "M", "L", "XL", "XXL"]
 - [x] Override `get_product_type()` method to return "Clothing"
 - [x] Override `__repr__()` method to include size and material information
-- [x] Add any clothing-specific methods if needed
+- [] Add any clothing-specific methods if needed
 
 ## 7. Implement Food class in source/products/Food.py inheriting from Product with expiry date functionality
-- [ ] Import Product class from classes.Product and datetime module
-- [ ] Create Food class inheriting from Product
-- [ ] Implement constructor that calls super().__init__() and adds `_expiry_date` attribute
-- [ ] Create property getter and setter for expiry_date with validation (not in the past)
-- [ ] Implement `is_expired()` method to check if product is expired
-- [ ] Override `get_product_type()` method to return "Food"
-- [ ] Override `__repr__()` method to include expiry date information
+- [x] Import Product class from classes.Product and datetime module
+- [x] Create Food class inheriting from Product
+- [x] Implement constructor that calls super().__init__() and adds `_expiry_date` attribute
+- [x] Create property getter and setter for expiry_date with validation (not in the past)
+- [x] Implement `is_expired()` method to check if product is expired
+- [x] Override `get_product_type()` method to return "Food"
+- [x] Override `__repr__()` method to include expiry date information
 - [ ] Add any food-specific methods if needed
 
 ## 8. Add abstract base class functionality to Product class with abstract methods

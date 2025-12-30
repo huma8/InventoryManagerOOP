@@ -1,7 +1,7 @@
 from classes.Product import Product
 
 class Electronics(Product):
-    def __init__(self, name, price, quantity, warranty_months:int, additional_info:str=""):
+    def __init__(self, name:str, price:float, quantity:int, warranty_months:int, additional_info:str=""):
         super().__init__(name, price, quantity)
         self._warranty_months = warranty_months
         self._info = additional_info
