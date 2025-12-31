@@ -47,11 +47,9 @@ class Product():
         self._price = value
 
     @quantity.setter
-    def quantity(self, value):
+    def quantity(self, value:int):
         if value < 0:
             raise ValueError("Quantity cannot be a negative number")
-        if type(value != int):
-            value = int(value)
         self._quantity = value
 
     def add_stock(self, value:int):

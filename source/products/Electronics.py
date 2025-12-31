@@ -20,7 +20,7 @@ class Electronics(Product):
     def info(self):
         return f"Name: {self.name} \nAdditional Info: {self._info}"
 
-    def get_product_type(args):
+    def get_product_type(self):
         return "Electronics"
     
     def __repr__(self):

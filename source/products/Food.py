@@ -24,7 +24,7 @@ class Food(Product):
     def is_expired(self):
         return self._expiry_date < datetime.date.today()
     
-    def get_product_type(args):
+    def get_product_type(self):
         return "Food"
     
     def __repr__(self):
