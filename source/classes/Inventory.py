@@ -1,8 +1,18 @@
 from classes.Product import Product
+from classes.Order import Order
+from products.Clothing import Clothing
+from products.Electronics import Electronics
+from products.Food import Food
+import datetime
+
+
+
 class Inventory:
     """Main inventory management system class"""
     def __init__(self):
         self._products = {}
+        self._suppliers = []
+        self._orders = []
     
     @property
     def products(self):
@@ -17,15 +27,16 @@ class Inventory:
         """Class method to create a sample inventory with different product types"""
         inventory = cls()
 
-        p = Product("ayfon", 15, 1)
-        p.name = "samsunG"
-        p.price = 5
-        p.quantity = 2.1
+        e = Electronics("ayfon", 15, 1, 12)
+        c = Clothing("Gore", 8, 3,"XL","Cotton","Please send cargo to this address ...")
+        f = Food("Kiwi", 4, 150, datetime.date.today() - datetime.timedelta(days=30))
+        f2 = Food("Apple", 1, 100, datetime.date.today() + datetime.timedelta(days=30))
+        
+        inventory.add_product(e)
+        inventory.add_product(c)
+        inventory.add_product(f)
+        inventory.add_product(f2)
 
-        t = Product("Gore", 8, 3)
-
-        inventory.add_product(p)
-        inventory.add_product(t)
         return inventory
 
     def add_product(self, product:Product):
@@ -83,11 +94,33 @@ class Inventory:
 
         return report
 
-    def add_supplier(args):
-        pass
+    def add_supplier(self, supplier):
+        self._suppliers.append(supplier)
 
-    def create_order(args):
-        pass
+    def create_order(self, order_type = "Purchase"):
+        order = Order(order_type)
+        self._orders.append(order)
+        return order
 
-    def get_expired_products(args):
-        pass
+    def textify(self,list):
+        txt = "Here are the products:\n"
+        for i in list:
+            txt += str(i) + "\n"
+        return txt
+
+    def get_expired_products(self):
+        """    
+        def get_expired_products(self):
+            expired = []
+            for product in self._products.values():
+                if isinstance(product, Perishable) and product.is_expired():
+                    expired.append(product)
+            return expired
+        """
+        list = []
+        for p in self._products.values():
+            if p.get_product_type() == "Food" and p.is_expired():
+                list.append(p)
+        return self.textify(list)
+    
+
