@@ -35,14 +35,13 @@ def main():
     print("\n3. Supplier Management:")
     supplier = Supplier("Tech Supplies Inc.", "contact@techsupplies.com")
     supplier.add_product(smartphone)
-    laptop = inventory.get_product(1)  # Get the laptop from the sample inventory
+    laptop = inventory.find_product_by_id(1)  # Get the laptop from the sample inventory
     if laptop:
         supplier.add_product(laptop)
     inventory.add_supplier(supplier)
-
+    
     print(f"Supplier: {supplier}")
     print(f"Products supplied: {[p.name for p in supplier.get_supplied_products()]}")
-
     # Create and execute orders
     print("\n4. Order Processing:")
 
@@ -89,7 +88,20 @@ def main():
     # Demonstrate class method
     print(f"\n8. Class Method - Creating Sample Inventory:")
     new_inventory = Inventory.create_sample_inventory()
-    print(f"New sample inventory has {len(new_inventory.products)} products")
+    print(f"New sample inventory has {new_inventory.get_product_count()} products")
+
+    #ADDITIONALS
+    """
+    print(new_inventory.find_product_by_type("Food"))
+    print(new_inventory.find_product_by_price(1,5))
+    print(new_inventory.find_product_by_quantity(1,5))
+    """
+    print(new_inventory.find_product_by_date(datetime.datetime(2025, 12, 1), datetime.datetime(2026, 1, 1)))
+
+
+
+def test():
+    pass
 
 if __name__ == "__main__":
     main()

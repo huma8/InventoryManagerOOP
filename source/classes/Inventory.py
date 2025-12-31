@@ -39,14 +39,20 @@ class Inventory:
 
         return inventory
 
+    #BASIC FUNCTIONS
+
     def add_product(self, product:Product):
-        if product.id in self._products:
+        if product in self._products.values():
             self._products[product.id].quantity += product.quantity
-        x = self.find_product_by_name(product.name)
-        if x:
-            self._products[x[0].id].quantity += product.quantity
         else:
             self._products[product.id] = product
+
+    def update_product(self, product:Product, name:str, price:float, quantity:int):
+        product.name = name
+        product.price = price
+        product.quantity = quantity
+
+        return product
 
     def remove_product(self, product:Product):
         if product.id in self._products:
@@ -54,22 +60,58 @@ class Inventory:
         else:
             return f"There is no product that has id:{product.id}"
 
-    def get_product(self, product_id:Product.id):
-        if product_id in self._products:
-            return self._products[product_id]
-        else:
-            return f"There is no product that has id: {product_id}"
-
     def list_product(self):
         list_text = ""
         for key, value in self._products.items():
             list_text += str(value) + "\n"
         return list_text
 
+    def get_product_count(self):
+        return len(self._products)
+
+    #FILTERS
+
+    def find_product_by_id(self, product_id:Product.id):
+        if product_id in self._products:
+            return self._products[product_id]
+        else:
+            return f"There is no product that has id: {product_id}"
+
     def find_product_by_name(self, name:str):
         if name or len(name) > 0:
-            return [product for product in self._products.values()
-                    if name.lower() in product.name.lower()]
+            for product in self._products.values():
+                if name.lower() == product.name.lower():
+                    return product 
+
+    def find_product_by_type(self, type:str):
+        list = []
+        for product in self._products.values():
+            if product.get_product_type() == type:
+                list.append(product)
+        return list
+
+    def find_product_by_price(self, start:int, end:int):
+        list = []
+        for product in self._products.values():
+            if start <= product.price <= end:
+                list.append(product)
+        return list
+
+    def find_product_by_quantity(self, start:int, end:int):
+        list = []
+        for product in self._products.values():
+            if start <= product.quantity <= end:
+                list.append(product)
+        return list
+
+    def find_product_by_date(self, start: datetime, end: datetime):
+        result = []
+        for product in self._products.values():
+            if start <= product._creation_date <= end:
+                result.append(product)
+        return result
+
+
 
     def get_low_stock_products(self, num:int):
         return [product for product in self._products.values()
@@ -123,4 +165,3 @@ class Inventory:
                 list.append(p)
         return self.textify(list)
     
-

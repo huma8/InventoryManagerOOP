@@ -11,7 +11,7 @@ class Product():
         self._name = name
         self._price = price
         self._quantity = quantity
-        self._created_at = datetime.datetime.now()
+        self._creation_date:datetime = datetime.datetime.now()
         Product._id_counter += 1
     
     #PROPERTY_GETTERS
@@ -29,7 +29,7 @@ class Product():
         return self._quantity
     @property
     def created_at(self):
-        return self._created_at
+        return self._creation_date
     
     #PROPERTY_SETTERS
     @name.setter
@@ -42,7 +42,7 @@ class Product():
     def price(self, value):
         if value < 0:
             raise ValueError("Price cannot be a negative number")
-        if type(value != float):
+        if type(value) != float:
             value = float(value)
         self._price = value
 
@@ -73,4 +73,4 @@ class Product():
         raise NotImplementedError("Make sure children of product class has get_product_type function")
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(Product id: {self._id}, Name: {self._name}, Price: {self._price}, Quantity: {self._quantity}, Created at {self._created_at})"
+        return f"{self.__class__.__name__}(Product id: {self._id}, Name: {self._name}, Price: {self._price}, Quantity: {self._quantity}, Created at {self._creation_date})"
