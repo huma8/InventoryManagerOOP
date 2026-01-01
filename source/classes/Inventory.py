@@ -1,9 +1,11 @@
 from classes.Product import Product
 from classes.Order import Order
+from classes.Supplier import Supplier
+from classes.Audit import AuditLog
+
 from products.Clothing import Clothing
 from products.Electronics import Electronics
 from products.Food import Food
-from classes.Audit import AuditLog
 import json
 import datetime
 
@@ -52,6 +54,41 @@ class Inventory:
 
     #APPLIER FUNCTIONS
 
+#####
+    def adjust_inventory(self, product_id, adjustment_amount, reason=""):
+        """
+        Adjust inventory for a specific product
+        :param product_id: ID of the product to adjust
+        :param adjustment_amount: Amount to adjust (positive for additions, negative for reductions)
+        :param reason: Reason for the adjustment
+        :return: Boolean indicating success
+        """
+        if product_id in self._products:
+            old_quantity = self._products[product_id].quantity
+            self._products[product_id].quantity += adjustment_amount
+            # Prevent negative quantities
+            if self._products[product_id].quantity < 0:
+                self._products[product_id].quantity = 0
+            self._logs.append(f"Inventory adjusted for product {product_id}: {old_quantity} -> {self._products[product_id].quantity} ({reason})")
+            return True
+        return False
+    
+    def correct_inventory(self, product_id, new_quantity, reason=""):
+        """
+        Correct inventory to a specific quantity
+        :param product_id: ID of the product to correct
+        :param new_quantity: New quantity to set
+        :param reason: Reason for the correction
+        :return: Boolean indicating success
+        """
+        if product_id in self._products and new_quantity >= 0:
+            old_quantity = self._products[product_id].quantity
+            self._products[product_id].quantity = new_quantity
+            self._logs.append(f"Inventory corrected for product {product_id}: {old_quantity} -> {new_quantity} ({reason})")
+            return True
+        return False
+#####
+
     def add_product(self, product:Product):
         if product in self._products.values():
             self._products[product.id].quantity += product.quantity
@@ -75,9 +112,10 @@ class Inventory:
         else:
             return f"There is no product that has id:{product.id}"
 
-    def add_supplier(self, supplier):
+    def add_supplier(self, supplier:Supplier):
         self._suppliers.append(supplier)
         self._logs.append(f"{AuditLog(supplier, "SUPPLIER", 1)}")
+        return None
 
     def create_order(self, order_type = "Purchase"):
         order = Order(order_type)
@@ -85,6 +123,73 @@ class Inventory:
         self._logs.append(f"{AuditLog(order_type, "ORDER", 1)}")
 
         return order
+
+    
+    #SUPPLIERS
+    def find_supplier_by_name(self, name):
+        """Find a supplier by name"""
+        for supplier in self._suppliers:
+            if supplier.name.lower() == name.lower():
+                return supplier
+        return None
+    
+    def find_suppliers_by_product_type(self, product_type:str):
+        """Find suppliers that supply a specific product type"""
+        matching_suppliers = []
+        for supplier in self._suppliers:
+            for product in supplier.get_supplied_products():
+                if product.get_product_type() == product_type:
+                    matching_suppliers.append(supplier)
+                    break  # Don't add the same supplier multiple times
+        return matching_suppliers
+    
+    def get_all_suppliers(self):
+        """Return a list of all suppliers"""
+        return self._suppliers
+
+    def place_order_with_supplier(self, supplier:Supplier, products_quantities:dict):
+        """
+        Place an order with a supplier for specific products
+        
+        :param supplier: Supplier object to place order with
+        :param products_quantities: Dictionary of product_id to quantity
+        :return: Order object
+        """
+        order = self.create_order("Purchase")
+        for product_id, quantity in products_quantities.items():
+            product = self.find_product_by_id(product_id)
+            if product:
+                order.add_item(product, quantity)
+        # Add the order to supplier's history
+        supplier._add_order_to_history({
+            'order': order,
+            'date': datetime.datetime.now(),
+            'status': 'pending'
+        })
+        return order
+
+    def track_supplier_delivery(self, supplier:Supplier, order:Order, delivery_date:datetime.datetime=None):
+        """
+        Track delivery from a supplier
+        :param supplier: Supplier object
+        :param order: Order object that was delivered
+        :param delivery_date: Date of delivery (defaults to now)
+        :return: Boolean indicating success
+        """
+        if delivery_date is None:
+            delivery_date = datetime.datetime.now()
+
+        # Update order status in supplier's history
+        for order_record in supplier._order_history:
+            if order_record['order'].order_id == order.order_id:
+                order_record['delivery_date'] = delivery_date
+                order_record['status'] = 'delivered'
+                # Record delivery time
+                order_placed = order_record['date']
+                delivery_time = (delivery_date - order_placed).days
+                supplier.add_delivery_record(delivery_time)
+                return True
+        return False
 
     #FILTERS
 
@@ -206,4 +311,3 @@ class Inventory:
         for i in self._logs:
             txt += i + "\n"
         return txt
-

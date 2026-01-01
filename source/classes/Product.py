@@ -68,7 +68,7 @@ class Product():
     def calculate_value_of_stock(self):
         return self._quantity * self._price
     
-    def get_product_type(args):
+    def get_product_type(self):
         """Get Product Type By Children"""
         raise NotImplementedError("Make sure children of product class has get_product_type function")
 
