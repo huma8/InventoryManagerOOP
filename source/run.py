@@ -97,10 +97,12 @@ def main():
     print(new_inventory.find_product_by_quantity(1,5))
     print(new_inventory.find_product_by_date(datetime.datetime(2025, 12, 1), datetime.datetime(2026, 1, 1)))
     print(new_inventory.transaction_history())
-    """
     print(inventory.logs)
     print(Inventory.stock_threshold)
+    """
+    
 
+    
 def test():
     pass
 
