@@ -29,10 +29,10 @@
 - [x] Implement `get_total_value()` method to calculate inventory value
 - [x] Create `get_low_stock_products()` method to identify products with low stock
 - [x] Add filtering methods to get products by type or other criteria
-- [ ] Add inventory history/transaction tracking
-- [ ] Implement stock level monitoring with configurable thresholds
-- [ ] Create methods to track product movement (additions, removals)
-- [ ] Add inventory audit functionality
+- [x] Add inventory history/transaction tracking
+- [x] Implement stock level monitoring with configurable thresholds
+- [x] Create methods to track product movement (additions, removals)
+- [x] Add inventory audit functionality
 - [ ] Implement inventory reports (by type, value, stock levels)
 - [ ] Add methods to handle inventory adjustments and corrections
 - [ ] Add supplier management methods

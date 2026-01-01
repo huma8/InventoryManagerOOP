@@ -88,17 +88,18 @@ def main():
     # Demonstrate class method
     print(f"\n8. Class Method - Creating Sample Inventory:")
     new_inventory = Inventory.create_sample_inventory()
-    print(f"New sample inventory has {new_inventory.get_product_count()} products")
+    print(f"New sample inventory has {new_inventory.product_count()} products")
 
     #ADDITIONALS
     """
     print(new_inventory.find_product_by_type("Food"))
     print(new_inventory.find_product_by_price(1,5))
     print(new_inventory.find_product_by_quantity(1,5))
-    """
     print(new_inventory.find_product_by_date(datetime.datetime(2025, 12, 1), datetime.datetime(2026, 1, 1)))
-
-
+    print(new_inventory.transaction_history())
+    """
+    print(inventory.logs)
+    print(Inventory.stock_threshold)
 
 def test():
     pass

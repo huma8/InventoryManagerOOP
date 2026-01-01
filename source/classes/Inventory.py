@@ -3,20 +3,32 @@ from classes.Order import Order
 from products.Clothing import Clothing
 from products.Electronics import Electronics
 from products.Food import Food
+from classes.Audit import AuditLog
+import json
 import datetime
 
 
 
 class Inventory:
     """Main inventory management system class"""
+    with open("source/products/product_stock_threshold.json", "r", encoding="utf-8") as f:
+        stock_threshold = json.load(f)
     def __init__(self):
         self._products = {}
         self._suppliers = []
         self._orders = []
+        self._logs = []
     
     @property
     def products(self):
         return self._products.copy()
+
+    @property
+    def logs(self):
+        txt=""
+        for i in self._logs:
+            txt += i + "\n"
+        return txt + "\n\n"
 
     @staticmethod
     def calculate_inventory_value(products):
@@ -36,38 +48,43 @@ class Inventory:
         inventory.add_product(c)
         inventory.add_product(f)
         inventory.add_product(f2)
-
         return inventory
 
-    #BASIC FUNCTIONS
+    #APPLIER FUNCTIONS
 
     def add_product(self, product:Product):
         if product in self._products.values():
             self._products[product.id].quantity += product.quantity
         else:
             self._products[product.id] = product
-
+        
+        self._logs.append(f"{AuditLog(product, "ADD", product.quantity)}")
+        
     def update_product(self, product:Product, name:str, price:float, quantity:int):
         product.name = name
         product.price = price
         product.quantity = quantity
 
+        self._logs.append(f"{AuditLog(product, "UPDATE", product.quantity)}")
         return product
 
     def remove_product(self, product:Product):
         if product.id in self._products:
             self._products.pop(product.id)
+            self._logs.append(f"{AuditLog(product, "REMOVE", product.quantity)}")
         else:
             return f"There is no product that has id:{product.id}"
 
-    def list_product(self):
-        list_text = ""
-        for key, value in self._products.items():
-            list_text += str(value) + "\n"
-        return list_text
+    def add_supplier(self, supplier):
+        self._suppliers.append(supplier)
+        self._logs.append(f"{AuditLog(supplier, "SUPPLIER", 1)}")
 
-    def get_product_count(self):
-        return len(self._products)
+    def create_order(self, order_type = "Purchase"):
+        order = Order(order_type)
+        self._orders.append(order)
+        self._logs.append(f"{AuditLog(order_type, "ORDER", 1)}")
+
+        return order
 
     #FILTERS
 
@@ -111,38 +128,57 @@ class Inventory:
                 result.append(product)
         return result
 
+    #REPORTS
 
+    def list_product(self):
+        list_text = ""
+        for key, value in self._products.items():
+            list_text += str(value) + "\n"
+        return list_text
 
-    def get_low_stock_products(self, num:int):
+    def product_count(self):
+        return len(self._products)
+
+    def low_stock_products(self):
         return [product for product in self._products.values()
-                if product.quantity < num]
+                if product.quantity < Inventory.stock_threshold["Products"][product.get_product_type()]]
+
+    def product_groups(self):
+        product_groups = {}
+        for product in self._products.values():
+            type = product.get_product_type()
+            if type not in product_groups:
+                product_groups[type] = []
+            product_groups[type].append(product)
+        
+        return product_groups
 
     def generate_inventory_report(self):
         """
         Generate an inventory report
         """
         report = "=== INVENTORY REPORT ===\n"
-        report += f"Total Products: {len(self._products)}\n"
+        report += f"Total Products: {self.product_count()}\n"
         report += f"Total Value Of Inventory {Inventory.calculate_inventory_value(self._products.values())}\n\n"
 
-        #add product_groups
+        #ADD product_groups
+        report += f"=== PRODUCTS BY GROUP ===\n"
+        product_groups = self.product_groups()
+
+        for type, prdct in product_groups.items():
+            report += f"{type}:\n"
+            for p in prdct:
+                report += " - " + str(p) + "\n"
+        report += "\n"
 
         #low stock alert
-        low_stock = self.get_low_stock_products(5)
+        low_stock = self.low_stock_products()
         if low_stock:
             report += "=== LOW STOCK ALERT ===\n"
             for stock in low_stock:
                 report += str(stock) + "\n"
 
         return report
-
-    def add_supplier(self, supplier):
-        self._suppliers.append(supplier)
-
-    def create_order(self, order_type = "Purchase"):
-        order = Order(order_type)
-        self._orders.append(order)
-        return order
 
     def textify(self,list):
         txt = "Here are the products:\n"
@@ -164,4 +200,10 @@ class Inventory:
             if p.get_product_type() == "Food" and p.is_expired():
                 list.append(p)
         return self.textify(list)
-    
+
+    def transaction_history(self):
+        txt = ""
+        for i in self._logs:
+            txt += i + "\n"
+        return txt
+
